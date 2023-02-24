@@ -22,7 +22,7 @@ public class Login implements ActionListener {
 
         panel.setLayout(null);
 
-        userLabel = new JLabel("User");
+        userLabel = new JLabel(Constants.USER.rawValue);
         userLabel.setBounds(10, 20, 80, 25);
         panel.add(userLabel);
        
@@ -30,7 +30,7 @@ public class Login implements ActionListener {
         userText.setBounds(100, 20, 165, 25);
         panel.add(userText);
 
-        passwordLabel = new JLabel("Password");
+        passwordLabel = new JLabel(Constants.PASSWORD.rawValue);
         passwordLabel.setBounds(10, 50, 80, 25);
         panel.add(passwordLabel);
 
@@ -38,7 +38,7 @@ public class Login implements ActionListener {
         passwordText.setBounds(100, 50, 165, 25);
         panel.add(passwordText);
 
-        button = new JButton("Login");
+        button = new JButton(Constants.LOGIN.rawValue);
         button.setBounds(135, 90, 80, 25);
         button.addActionListener(new Login());
 
@@ -63,8 +63,6 @@ public class Login implements ActionListener {
         if (message == PasswordValidation.VALID_LOGIN_CREDENTIALS.rawValue) { 
             sucessLabel.setForeground(Color.green);
         }
-        
         sucessLabel.setText(message);
-        
     }
 }
