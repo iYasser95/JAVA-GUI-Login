@@ -59,21 +59,10 @@ public class Login implements ActionListener {
         // By default it's an error color.
         sucessLabel.setForeground(Color.red); 
         // User Validation
-        if (username.isBlank() && password.isBlank()) { 
-            message = PasswordValidation.EMPTY_USERNAME_AND_PASSWORD.rawValue;
-        } else if (username.isBlank()) { 
-            message = PasswordValidation.EMPTY_USERNAME.rawValue;
-        } else if (password.isBlank()) { 
-            message = PasswordValidation.EMPTY_PASSWORD.rawValue;
-        } else if (!password.equals(UserCredentials.VALID_PASSWORD.rawValue) 
-                || !username.equals(UserCredentials.VALID_USERNAME.rawValue)) {
-            message = PasswordValidation.INVALID_USERNAME_OR_PASSWORD.rawValue;
-        } else if (password.equals(UserCredentials.VALID_PASSWORD.rawValue) 
-                && username.equals(UserCredentials.VALID_USERNAME.rawValue)) { 
-            message = PasswordValidation.VALID_LOGIN_CREDENTIALS.rawValue;
-            // Set Successful color.
+        message = Validator.validate(username, password);
+        if (message == PasswordValidation.VALID_LOGIN_CREDENTIALS.rawValue) { 
             sucessLabel.setForeground(Color.green);
-        } 
+        }
         
         sucessLabel.setText(message);
         
