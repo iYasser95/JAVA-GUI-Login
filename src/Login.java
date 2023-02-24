@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+
 public class Login implements ActionListener {
 
     // GUI Elements
@@ -12,12 +14,16 @@ public class Login implements ActionListener {
     private static JLabel sucessLabel;
 
     public static void main(String[] args) throws Exception {
+        setupView();
+    }
+
+    private static void setupView() {
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
 
         frame.setSize(350, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         frame.add(panel);
 
         panel.setLayout(null);
@@ -25,7 +31,7 @@ public class Login implements ActionListener {
         userLabel = new JLabel(Constants.USER.rawValue);
         userLabel.setBounds(10, 20, 80, 25);
         panel.add(userLabel);
-       
+
         userText = new JTextField(20);
         userText.setBounds(100, 20, 165, 25);
         panel.add(userText);
@@ -48,21 +54,58 @@ public class Login implements ActionListener {
 
         panel.add(button);
 
+        defaultViewSetup();
         frame.setVisible(true);
+    }
+
+    private static void defaultViewSetup() {
+        Border defaultBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1);
+        sucessLabel.setForeground(Color.red);
+        userText.setBorder(defaultBorder);
+        passwordText.setBorder(defaultBorder);
+    }
+
+    private static void validateFields() { 
+        Border errorBorder = BorderFactory.createLineBorder(Color.RED, 1);
+        switch (Validator.validator) {
+            case EMPTY_USERNAME_AND_PASSWORD:
+                userText.setBorder(errorBorder);
+                passwordText.setBorder(errorBorder);
+                break;
+            case EMPTY_USERNAME:
+                userText.setBorder(errorBorder);
+                break;
+            case EMPTY_PASSWORD:
+                passwordText.setBorder(errorBorder);
+                break;
+            case INVALID_USERNAME_OR_PASSWORD:
+                userText.setBorder(errorBorder);
+                passwordText.setBorder(errorBorder);
+                break;
+            case VALID_LOGIN_CREDENTIALS:
+                sucessLabel.setForeground(Color.GREEN);
+                break;
+            case NONE:
+                break;
+        }
+    }
+    private static void validateUser() {
+        String username = userText.getText();
+        String password = passwordText.getText();
+        String message = "";
+
+        // Default setup
+        defaultViewSetup();
+        // User Validation
+        message = Validator.validate(username, password);
+        // Validate Fields
+        validateFields();
+        // Show Error / Success message
+        sucessLabel.setText(message);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String username = userText.getText();
-        String password = passwordText.getText();
-        String message = "";
-        // By default it's an error color.
-        sucessLabel.setForeground(Color.red); 
-        // User Validation
-        message = Validator.validate(username, password);
-        if (message == PasswordValidation.VALID_LOGIN_CREDENTIALS.rawValue) { 
-            sucessLabel.setForeground(Color.green);
-        }
-        sucessLabel.setText(message);
+        validateUser();
     }
 }

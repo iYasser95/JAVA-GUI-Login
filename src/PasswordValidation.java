@@ -3,7 +3,8 @@ public enum PasswordValidation {
     EMPTY_PASSWORD("Please Enter Password"),
     EMPTY_USERNAME_AND_PASSWORD("Please Enter User name & Password"),
     INVALID_USERNAME_OR_PASSWORD("Invalid Username or Password"),
-    VALID_LOGIN_CREDENTIALS("Logged In Successfully");
+    VALID_LOGIN_CREDENTIALS("Logged In Successfully"),
+    NONE("");
 
     String rawValue = new String();
     PasswordValidation(String rawValue) { 
