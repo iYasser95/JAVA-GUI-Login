@@ -5,8 +5,6 @@ public enum PasswordValidation {
     INVALID_USERNAME_OR_PASSWORD("Invalid Username or Password"),
     VALID_LOGIN_CREDENTIALS("Logged In Successfully");
 
-
-
     String rawValue = new String();
     PasswordValidation(String rawValue) { 
         this.rawValue = rawValue;
