@@ -31,7 +31,12 @@ public class GUI {
        panel.add(passwordText);
 
         JButton button = new JButton("Login");
-        button.setBounds(130, 90, 80, 25);
+        button.setBounds(135, 90, 80, 25);
+
+        JLabel sucessLabel = new JLabel("");
+        sucessLabel.setBounds(10, 110, 300, 25);
+        panel.add(sucessLabel);
+
         panel.add(button);
 
        frame.setVisible(true);
