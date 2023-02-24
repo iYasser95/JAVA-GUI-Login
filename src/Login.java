@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class GUI implements ActionListener {
+public class Login implements ActionListener {
 
     // GUI Elements
     private static JLabel userLabel;
@@ -13,12 +13,6 @@ public class GUI implements ActionListener {
     // Validation
     private static String validUsername = "admin";
     private static String validPassword = "admin123";
-    // Validation Messages
-    final String INVALID_USERNAME_OR_PASSWORD = "Invalid Username or Password";
-    final String EMPTY_USERNAME = "Please Enter User Name";
-    final String EMPTY_PASSWORD = "Please Enter Password";
-    final String EMPTY_USERNAME_AND_PASSWORD =  "Please Enter User name & Password";
-    final String VALID_LOGIN_CREDENTIALS = "Logged In Successfully";
 
     public static void main(String[] args) throws Exception {
         JPanel panel = new JPanel();
@@ -49,7 +43,7 @@ public class GUI implements ActionListener {
 
         button = new JButton("Login");
         button.setBounds(135, 90, 80, 25);
-        button.addActionListener(new GUI());
+        button.addActionListener(new Login());
 
         sucessLabel = new JLabel("");
         sucessLabel.setBounds(75, 120, 300, 25);
@@ -69,15 +63,15 @@ public class GUI implements ActionListener {
         sucessLabel.setForeground(Color.red); 
         // User Validation
         if (username.isBlank() && password.isBlank()) { 
-            message = EMPTY_USERNAME_AND_PASSWORD;
+            message = PasswordValidation.EMPTY_USERNAME_AND_PASSWORD.rawValue;
         } else if (username.isBlank()) { 
-            message = EMPTY_USERNAME;
+            message = PasswordValidation.EMPTY_USERNAME.rawValue;
         } else if (password.isBlank()) { 
-            message = EMPTY_PASSWORD;
+            message = PasswordValidation.EMPTY_PASSWORD.rawValue;
         } else if (!password.equals(validPassword) || !username.equals(validUsername)) {
-            message = INVALID_USERNAME_OR_PASSWORD;
+            message = PasswordValidation.INVALID_USERNAME_OR_PASSWORD.rawValue;
         } else if (password.equals(validPassword) && username.equals(validUsername)) { 
-            message = VALID_LOGIN_CREDENTIALS;
+            message = PasswordValidation.VALID_LOGIN_CREDENTIALS.rawValue;
             // Set Successful color.
             sucessLabel.setForeground(Color.green);
         } 
